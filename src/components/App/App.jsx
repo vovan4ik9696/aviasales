@@ -1,10 +1,10 @@
-import React from "react";
-import Header from "../Header";
-import Filters from "../Filters";
-import SortList from "../SortList";
-import TicketsList from "../TicketsList";
+import React from 'react';
+import Header from '../Header';
+import Filters from '../Filters';
+import SortList from '../SortList';
+import TicketsList from '../TicketsList';
 
-import "./App.css";
+import './App.css';
 
 const App = () => {
   return (

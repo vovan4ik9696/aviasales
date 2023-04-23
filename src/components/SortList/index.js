@@ -1,3 +1,3 @@
-import SortList from "./SortList";
+import SortList from './SortList';
 
 export default SortList;

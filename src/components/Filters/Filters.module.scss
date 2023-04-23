@@ -50,7 +50,7 @@
   }
 
   &__checkbox + label::before {
-    content: "";
+    content: '';
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -66,6 +66,6 @@
 
   &__checkbox:checked + label::before {
     border-color: #2196f3;
-    background-image: url("../FiltersItem/icons/Shape.svg");
+    background-image: url('../FiltersItem/icons/Shape.svg');
   }
 }

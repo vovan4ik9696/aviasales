@@ -1,3 +1,3 @@
-import SortItem from "./SortItem";
+import SortItem from './SortItem';
 
 export default SortItem;
