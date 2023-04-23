@@ -1,0 +1,79 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+ol[class] {
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0px 100px;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: left;
+
+  background-color: #e5e5e5;
+}
+
+.main__inner {
+  display: flex;
+  justify-content: center;
+  grid-column-gap: 20px;
+}
+
+.main__content {
+  max-width: 510px;
+  width: 100%;
+}
