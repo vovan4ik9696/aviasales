@@ -1,2 +1,2 @@
 vercel
-nothing
+https://aviasales-teal.vercel.app
