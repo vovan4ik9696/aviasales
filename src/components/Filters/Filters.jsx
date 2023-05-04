@@ -7,7 +7,7 @@ import FiltersItem from '../FiltersItem';
 import classes from './Filters.module.scss';
 
 const Filters = () => {
-  const filters = useSelector((state) => state.filters);
+  const filters = useSelector((state) => state.filtersState.filters);
   const filtersElements =
     filters &&
     filters.map((item, index) => {

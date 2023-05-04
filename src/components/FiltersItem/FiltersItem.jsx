@@ -1,8 +1,8 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import classes from '../Filters/Filters.module.scss';
 
+// eslint-disable-next-line no-unused-vars
 const FiltersItem = ({ filterData: { label, cheсked, value }, index }) => {
   const dispatch = useDispatch();
 

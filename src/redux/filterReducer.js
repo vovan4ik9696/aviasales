@@ -33,8 +33,6 @@ export const filterReducer = (state = initialState, action) => {
         return item.cheсked && index > 1;
       }).length;
 
-      console.log(checkAll);
-
       if (checkAll === 3) {
         newFilters[0].cheсked = true;
         newFilters[1].cheсked = false;
