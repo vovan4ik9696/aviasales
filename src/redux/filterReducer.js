@@ -1,10 +1,10 @@
 const initialState = {
   filters: [
-    { label: 'Все', cheсked: false, value: 'all' },
-    { label: 'Без пересадок', cheсked: true, value: 'none' },
-    { label: '1 пересадка', cheсked: false, value: '1' },
-    { label: '2 пересадки', cheсked: false, value: '2' },
-    { label: '3 пересадки', cheсked: false, value: '3' },
+    { label: 'Все', checked: false, value: 'all' },
+    { label: 'Без пересадок', checked: true, value: 0 },
+    { label: '1 пересадка', checked: false, value: 1 },
+    { label: '2 пересадки', checked: false, value: 2 },
+    { label: '3 пересадки', checked: false, value: 3 },
   ],
 };
 
@@ -15,35 +15,35 @@ export const filterReducer = (state = initialState, action) => {
       const targetIndex = action.payload;
       const targetItem = newFilters[targetIndex];
 
-      targetItem.cheсked = !targetItem.cheсked;
+      targetItem.checked = !targetItem.checked;
 
       newFilters[targetIndex] = targetItem;
 
       if (targetIndex === 0) {
         newFilters.forEach((item, index) => {
-          index > 1 ? (targetItem.cheсked ? (item.cheсked = true) : (item.cheсked = false)) : item.cheсked;
+          index > 1 ? (targetItem.checked ? (item.checked = true) : (item.checked = false)) : item.checked;
         });
       } else if (targetIndex === 1) {
         newFilters.forEach((item, index) => {
-          index !== 1 ? (item.cheсked = !targetItem.cheсked) : item.cheсked;
+          index !== 1 ? (item.checked = !targetItem.checked) : item.checked;
         });
       }
 
       const checkAll = newFilters.filter((item, index) => {
-        return item.cheсked && index > 1;
+        return item.checked && index > 1;
       }).length;
 
       if (checkAll === 3) {
-        newFilters[0].cheсked = true;
-        newFilters[1].cheсked = false;
+        newFilters[0].checked = true;
+        newFilters[1].checked = false;
       } else {
-        newFilters[0].cheсked = false;
+        newFilters[0].checked = false;
       }
 
       if (checkAll !== 0) {
-        newFilters[1].cheсked = false;
+        newFilters[1].checked = false;
       } else {
-        newFilters[1].cheсked = true;
+        newFilters[1].checked = true;
       }
 
       return {

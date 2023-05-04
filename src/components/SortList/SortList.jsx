@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { v4 as uukey } from 'uuid';
 
 import SortItem from '../SortItem';
@@ -6,11 +7,7 @@ import SortItem from '../SortItem';
 import classes from './SortList.module.scss';
 
 const SortList = () => {
-  const sortTabs = [
-    { label: 'Самый дешевый', active: true },
-    { label: 'Самый быстрый', active: false },
-    { label: 'Оптимальный', active: false },
-  ];
+  const sortTabs = useSelector((state) => state.sortState.sortList);
   const sortElements = sortTabs.map((item) => {
     return <SortItem key={uukey()} sortTab={item} />;
   });

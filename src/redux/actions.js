@@ -5,6 +5,7 @@ const ticketServise = new TicketServise();
 export const filtersUpdate = (index) => ({ type: 'TOGGLE_FILTER', payload: index });
 export const setSearchId = (id) => ({ type: 'GET_SEARCH_ID', payload: id });
 export const setTickets = (payload) => ({ type: 'GET_TICKETS', payload });
+export const sortUpdate = (index) => ({ type: 'TOGGLE_SORT', payload: index });
 
 export const getSearchId = (dispatch) => {
   ticketServise.getSearchId().then((data) => dispatch(setSearchId(data)));

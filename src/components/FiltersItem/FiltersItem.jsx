@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import classes from '../Filters/Filters.module.scss';
 
 // eslint-disable-next-line no-unused-vars
-const FiltersItem = ({ filterData: { label, cheсked, value }, index }) => {
+const FiltersItem = ({ filterData: { label, checked, value }, index }) => {
   const dispatch = useDispatch();
 
   const handleFilterChange = () => {
@@ -14,7 +14,7 @@ const FiltersItem = ({ filterData: { label, cheсked, value }, index }) => {
     <li className={classes['filters__item']}>
       <input
         className={classes['filters__checkbox']}
-        checked={cheсked}
+        checked={checked}
         type="checkbox"
         name={value}
         value={value}
