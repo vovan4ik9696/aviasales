@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 
+import { TOGGLE_FILTER } from '../../redux/actionTypes';
 import classes from '../Filters/Filters.module.scss';
 
-// eslint-disable-next-line no-unused-vars
 const FiltersItem = ({ filterData: { label, checked, value }, index }) => {
   const dispatch = useDispatch();
 
   const handleFilterChange = () => {
-    dispatch({ type: 'TOGGLE_FILTERS', payload: index });
+    dispatch({ type: TOGGLE_FILTER, payload: index });
   };
 
   return (

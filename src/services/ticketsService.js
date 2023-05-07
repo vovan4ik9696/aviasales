@@ -1,6 +1,8 @@
 export default class TicketServise {
+  _api = 'https://aviasales-test-api.kata.academy/';
+
   getSearchId = async () => {
-    const api = 'https://aviasales-test-api.kata.academy/search';
+    const api = `${this._api}search`;
     const result = await fetch(api);
     const searchId = result.json();
 
@@ -8,10 +10,29 @@ export default class TicketServise {
   };
 
   getTickets = async (searchId) => {
-    const api = `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`;
-    const result = await fetch(api);
-    const ticketsData = result.json();
+    const api = `${this._api}tickets?searchId=${searchId}`;
 
-    return ticketsData;
+    const fetchWithRetry = async () => {
+      try {
+        const result = await fetch(api);
+
+        if (result.status >= 500 && result.status < 600) {
+          return await fetchWithRetry();
+        }
+
+        if (!result.ok) {
+          throw new Error(`API error: ${result.status} ${result.statusText}`);
+        }
+
+        const ticketsData = await result.json();
+
+        return ticketsData;
+      } catch (error) {
+        console.error(`Failed to fetch tickets: ${error.message}`);
+        throw error;
+      }
+    };
+
+    return fetchWithRetry();
   };
 }

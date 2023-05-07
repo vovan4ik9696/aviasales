@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { v4 as uukey } from 'uuid';
 
 import FiltersItem from '../FiltersItem';
 
@@ -11,7 +10,7 @@ const Filters = () => {
   const filtersElements =
     filters &&
     filters.map((item, index) => {
-      return <FiltersItem key={uukey()} filterData={item} index={index} />;
+      return <FiltersItem key={item.value} filterData={item} index={index} />;
     });
 
   return (

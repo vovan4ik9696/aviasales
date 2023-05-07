@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uukey } from 'uuid';
 import { add, format } from 'date-fns';
 
 import { getSearchId, getTickets } from '../../redux/actions';
@@ -12,8 +11,10 @@ const TicketsList = () => {
   const searchId = useSelector((state) => state.ticketsState.searchId);
   const tickets = useSelector((state) => state.ticketsState.tickets);
   const filters = useSelector((state) => state.filtersState.filters);
+  const sorts = useSelector((state) => state.sortState.sortList);
 
-  const [stopFilter, setStopFilter] = useState(0);
+  const [stopFilter, setStopFilter] = useState('');
+  const [sortedTickets, setSortedTickets] = useState(tickets);
 
   useEffect(() => {
     dispatch(getSearchId);
@@ -38,10 +39,31 @@ const TicketsList = () => {
     setStopFilter(() => stopFilterValue());
   }, [filters]);
 
+  useEffect(() => {
+    const sortActive = sorts.find((item) => item.active);
+
+    if (sortActive) {
+      const { id } = sortActive;
+      let newSortedTickets = [...tickets];
+      if (id === 0) {
+        newSortedTickets.sort((a, b) => a.price - b.price);
+      } else if (id === 1) {
+        newSortedTickets.sort((a, b) => {
+          const totalDurationA = a.segments.reduce((acc, segment) => acc + segment.duration, 0);
+          const totalDurationB = b.segments.reduce((acc, segment) => acc + segment.duration, 0);
+
+          return totalDurationA - totalDurationB;
+        });
+      }
+      setSortedTickets(newSortedTickets);
+    }
+  }, [sorts, tickets]);
+
   const packSize = 20;
-  const ticketsPack = tickets.map((ticket, index) => {
+
+  const ticketsPack = sortedTickets.map((ticket, index) => {
     if (index < packSize) {
-      const { price, segments } = ticket;
+      const { price, segments, carrier } = ticket;
 
       const segmentsList = segments.map((segment) => {
         const { date, destination, duration, origin, stops } = segment;
@@ -57,7 +79,7 @@ const TicketsList = () => {
           const item = stopFilter[i];
           if (item === stops.length || item === 'all') {
             return (
-              <div className={classes['tickets__variable']} key={uukey()}>
+              <div className={classes['tickets__variable']} key={origin + date + destination}>
                 <div className={classes['tickets__variable-item']}>
                   <div className={classes['tickets__variable-title']}>{`${origin} - ${destination}`}</div>
                   <div className={classes['tickets__variable-text']}>{time}</div>
@@ -80,11 +102,11 @@ const TicketsList = () => {
 
       if (filtredSegment.length !== 0) {
         return (
-          <li className={classes['tickets__item']} key={uukey()}>
+          <li className={classes['tickets__item']} key={price + carrier + segments[0].date}>
             <div className={classes['tickets__header']}>
               <div className={classes['tickets__price']}>{`${price} Р`}</div>
               <div className={classes['tickets__img']}>
-                <img src="/" alt="Логотип авиалинии" />
+                <img src={`https://pics.avs.io/99/36/${carrier}.png`} alt="Логотип авиалинии" />
               </div>
             </div>
 
